@@ -2,14 +2,31 @@ package com.example.sahabss.data.remote.repository
 
 import com.example.sahabss.data.remote.model.employee.Employee
 import com.example.sahabss.util.UiStateResource
+import io.reactivex.Maybe
+import io.reactivex.disposables.CompositeDisposable
 
 interface EmployeeRepository {
 
-    suspend fun getEmployees(): UiStateResource<List<Employee>>
+    fun getEmployees(
+        compositeDisposable: CompositeDisposable,
+        onResponse: (UiStateResource<List<Employee>>) -> Unit
+    )
 
-    suspend fun getEmployee(id: String): UiStateResource<Employee>
+    fun getEmployee(
+        compositeDisposable: CompositeDisposable,
+        id: String,
+        onResponse: (UiStateResource<Employee>) -> Unit
+    )
 
-    suspend fun updateEmployee(id: String): UiStateResource<String>
+    fun updateEmployee(
+        compositeDisposable: CompositeDisposable,
+        id: String,
+        onResponse: (UiStateResource<String>) -> Unit
+    )
 
-    suspend fun deleteEmployee(id: String): UiStateResource<String>
+    fun deleteEmployee(
+        compositeDisposable: CompositeDisposable,
+        id: String,
+        onResponse: (UiStateResource<String>) -> Unit
+    )
 }

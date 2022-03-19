@@ -8,6 +8,7 @@ import com.example.sahabss.data.remote.model.employee.Employee
 import com.example.sahabss.data.remote.repository.EmployeeRepository
 import com.example.sahabss.util.UiStateResource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,6 +16,8 @@ import javax.inject.Inject
 class EmployeeViewModel @Inject constructor(
     private val repository: EmployeeRepository
 ) : ViewModel() {
+
+    private val compositeDisposable = CompositeDisposable()
 
     private val _employeesLiveData = MutableLiveData<UiStateResource<List<Employee>>>()
     val employeesLiveData: LiveData<UiStateResource<List<Employee>>>
@@ -27,14 +30,24 @@ class EmployeeViewModel @Inject constructor(
     fun getEmployees() {
         viewModelScope.launch {
             _employeesLiveData.value = UiStateResource.Loading
-            _employeesLiveData.value = repository.getEmployees()
+            repository.getEmployees(compositeDisposable){
+                _employeesLiveData.value = it
+            }
         }
     }
 
     fun getEmployeeById(id: String) {
         viewModelScope.launch {
             _employeeLiveData.value = UiStateResource.Loading
-            _employeeLiveData.value = repository.getEmployee(id)
+            repository.getEmployee(compositeDisposable,id){
+                _employeeLiveData.postValue(it)
+            }
         }
+    }
+
+
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
     }
 }
