@@ -1,4 +1,4 @@
-package com.example.sahabss.data.repository
+package com.example.sahabss.data.remote.repository
 
 import com.example.sahabss.data.remote.model.employee.Employee
 import com.example.sahabss.util.UiStateResource
