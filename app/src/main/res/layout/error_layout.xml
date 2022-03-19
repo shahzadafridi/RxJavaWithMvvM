@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/error_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="32dp"
+    android:visibility="gone"
+    android:orientation="vertical"
+    app:cardCornerRadius="16dp"
+    app:contentPadding="16dp"
+    app:strokeColor="@color/item_employee_divider"
+    app:strokeWidth="1dp">
+
+    <TextView
+        android:id="@+id/error_tv"
+        style="@style/HelveticaRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="fsdfasf"
+        android:textSize="14sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/error_retry_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/white"
+        android:ellipsize="marquee"
+        android:fontFamily="@font/helvetica_neue_bold"
+        android:singleLine="true"
+        android:text="@string/retry"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:cornerRadius="35dp"
+        app:strokeColor="@color/green"
+        app:strokeWidth="1dp" />
+
+</com.google.android.material.card.MaterialCardView>

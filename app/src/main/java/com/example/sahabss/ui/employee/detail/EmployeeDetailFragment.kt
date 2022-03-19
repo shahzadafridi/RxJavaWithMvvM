@@ -1,4 +1,4 @@
-package com.example.sahabss.ui.employee
+package com.example.sahabss.ui.employee.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.sahabss.R
 import com.example.sahabss.databinding.FragmentEmployeeDetailBinding
+import com.example.sahabss.ui.employee.EmployeeViewModel
 import com.example.sahabss.util.UiStateResource
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
