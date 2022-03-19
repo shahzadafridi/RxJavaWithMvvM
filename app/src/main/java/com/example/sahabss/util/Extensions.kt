@@ -1,6 +1,7 @@
 package com.example.sahabss.util
 
 import android.graphics.drawable.Drawable
+import android.os.SystemClock
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -66,4 +67,13 @@ fun ImageView.load(
         .apply(RequestOptions.placeholderOf(placeholder))
         .listener(listener)
         .into(this)
+}
+
+
+fun View.setOnSafeClickListener(block: (View) -> Unit) {
+    setOnClickListener(SafeClickListener { block(it) })
+}
+
+fun View.setOnSafeClickListener(timeGap: Long, block: (View) -> Unit) {
+    setOnClickListener(SafeClickListener(timeGap) { block(it) })
 }
