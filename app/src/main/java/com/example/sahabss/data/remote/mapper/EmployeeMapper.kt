@@ -2,6 +2,8 @@ package com.example.sahabss.data.remote.mapper
 
 import com.example.sahabss.data.remote.dto.employee.EmployeeDTO
 import com.example.sahabss.data.remote.dto.employee.EmployeesDTO
+import com.example.sahabss.data.remote.dto.employee.delete.DeleteEmployeeDTO
+import com.example.sahabss.data.remote.dto.employee.update.UpdateEmployeeDTO
 import com.example.sahabss.data.remote.model.employee.Employee
 
 object EmployeeMapper {
@@ -28,11 +30,11 @@ object EmployeeMapper {
         )
     }
 
-    fun fromupdateEmpoyeesDTO(dto: EmployeesDTO): String {
+    fun fromupdateEmpoyeesDTO(dto: UpdateEmployeeDTO): String {
         return dto.message
     }
 
-    fun fromdeleteEmpoyeesDTO(dto: EmployeesDTO): String{
+    fun fromdeleteEmpoyeesDTO(dto: DeleteEmployeeDTO): String{
         return dto.message
     }
 

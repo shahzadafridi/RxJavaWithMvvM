@@ -1,5 +1,7 @@
 package com.example.sahabss.util
 
+import com.example.sahabss.data.util.Error
+
 
 sealed class UiStateResource<out T> {
     object Loading : UiStateResource<Nothing>()
