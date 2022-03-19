@@ -1,4 +1,4 @@
-package com.example.sahabss.ui.employee
+package com.example.sahabss.ui.employee.listing
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EmployeeViewModel @Inject constructor(
+class ListingEmployeeViewModel @Inject constructor(
     private val repository: EmployeeRepository
 ) : ViewModel() {
 
@@ -23,41 +23,17 @@ class EmployeeViewModel @Inject constructor(
     val employeesLiveData: LiveData<UiStateResource<List<Employee>>>
         get() = _employeesLiveData
 
-    private val _employeeLiveData = MutableLiveData<UiStateResource<Employee>>()
-    val employeeLiveData: LiveData<UiStateResource<Employee>>
-        get() = _employeeLiveData
-
-    private val _updateEmployeeLiveData = MutableLiveData<UiStateResource<String>>()
-    val updateEmployeeLiveData: LiveData<UiStateResource<String>>
-        get() = _updateEmployeeLiveData
 
     private val _deleteEmployeeLiveData = MutableLiveData<UiStateResource<String>>()
     val deleteEmployeeLiveData: LiveData<UiStateResource<String>>
         get() = _deleteEmployeeLiveData
+
 
     fun getEmployees() {
         viewModelScope.launch {
             _employeesLiveData.value = UiStateResource.Loading
             repository.getEmployees(compositeDisposable){
                 _employeesLiveData.value = it
-            }
-        }
-    }
-
-    fun getEmployeeById(id: Int) {
-        viewModelScope.launch {
-            _employeeLiveData.value = UiStateResource.Loading
-            repository.getEmployee(compositeDisposable,id){
-                _employeeLiveData.postValue(it)
-            }
-        }
-    }
-
-    fun updateEmployeeById(id: Int, payload: Map<String,String?>,) {
-        viewModelScope.launch {
-            _updateEmployeeLiveData.value = UiStateResource.Loading
-            repository.updateEmployee(compositeDisposable,id, payload){
-                _updateEmployeeLiveData.postValue(it)
             }
         }
     }
