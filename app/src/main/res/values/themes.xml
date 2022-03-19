@@ -22,4 +22,21 @@
     <style name="Theme.Sahabss.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Sahabss.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="HelveticaRegular">
+        <item name="android:fontFamily">@font/helvetica_neue_regular</item>
+    </style>
+
+    <style name="HelveticaMedium">
+        <item name="android:fontFamily">@font/helvetica_neue_medium</item>
+    </style>
+
+    <style name="HelveticaBold">
+        <item name="android:fontFamily">@font/helvetica_neue_bold</item>
+    </style>
+
+    <style name="HelveticaLight">
+        <item name="android:fontFamily">@font/helvetica_neue_light</item>
+    </style>
+
 </resources>

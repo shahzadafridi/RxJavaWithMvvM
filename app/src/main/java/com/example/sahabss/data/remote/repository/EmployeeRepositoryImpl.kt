@@ -52,7 +52,9 @@ class EmployeeRepositoryImpl @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<EmployeeDTO>() {
                     override fun onSuccess(data: EmployeeDTO) {
-                        UiStateResource.Success(EmployeeMapper.fromEmpoyeeDTO(data))
+                        onResponse.invoke(
+                            UiStateResource.Success(EmployeeMapper.fromEmpoyeeDTO(data))
+                        )
                     }
 
                     override fun onError(e: Throwable) {
@@ -75,7 +77,9 @@ class EmployeeRepositoryImpl @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<UpdateEmployeeDTO>() {
                     override fun onSuccess(data: UpdateEmployeeDTO) {
-                        UiStateResource.Success(EmployeeMapper.fromupdateEmpoyeesDTO(data))
+                        onResponse.invoke(
+                            UiStateResource.Success(EmployeeMapper.fromupdateEmpoyeesDTO(data))
+                        )
                     }
 
                     override fun onError(e: Throwable) {
@@ -98,7 +102,9 @@ class EmployeeRepositoryImpl @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<DeleteEmployeeDTO>() {
                     override fun onSuccess(data: DeleteEmployeeDTO) {
-                        UiStateResource.Success(EmployeeMapper.fromdeleteEmpoyeesDTO(data))
+                        onResponse.invoke(
+                            UiStateResource.Success(EmployeeMapper.fromdeleteEmpoyeesDTO(data))
+                        )
                     }
 
                     override fun onError(e: Throwable) {
