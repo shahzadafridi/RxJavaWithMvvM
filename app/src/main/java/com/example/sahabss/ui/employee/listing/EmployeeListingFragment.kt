@@ -48,7 +48,7 @@ class EmployeeListingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.employeeListingRv.apply {
+        binding.recyclerView.apply {
             adapter = adatper
         }
         observer()
@@ -63,7 +63,7 @@ class EmployeeListingFragment : Fragment() {
     }
 
     private fun onDeleteClicked(position: Int, item: Employee){
-        binding.employeeListingProgresBar.show()
+        binding.progresBar.show()
         viewModel.deleteEmployeeById(item.id)
         viewModel.deleteEmployeeLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -76,14 +76,14 @@ class EmployeeListingFragment : Fragment() {
                         errorTv.setText(state.error.displayMessage)
                         errorRetryBtn.setOnSafeClickListener {
                             errorLayout.hide()
-                            binding.employeeListingProgresBar.show()
+                            binding.progresBar.show()
                             viewModel.deleteEmployeeById(item.id)
                         }
                     }
                     Timber.e("${this.javaClass.canonicalName}: %s", state.error.displayMessage)
                 }
                 is UiStateResource.Success -> {
-                    binding.employeeListingProgresBar.hide()
+                    binding.progresBar.hide()
                     adatper.removeItem(position)
                     Timber.d("${this.javaClass.canonicalName}: %s", state.data)
                 }
@@ -96,17 +96,17 @@ class EmployeeListingFragment : Fragment() {
             when (state) {
                 UiStateResource.Loading -> {
                     Timber.d("${this.javaClass.canonicalName}: %s", "Loading")
-                    binding.employeeListingProgresBar.show()
+                    binding.progresBar.show()
                 }
                 is UiStateResource.Failure -> {
-                    binding.employeeListingProgresBar.hide()
+                    binding.progresBar.hide()
                     //binding.root.showSnackBar(state.error.displayMessage)
                     binding.errorLay.apply {
                         errorLayout.show()
                         errorTv.setText(state.error.displayMessage)
                         errorRetryBtn.setOnSafeClickListener {
                             errorLayout.hide()
-                            binding.employeeListingProgresBar.show()
+                            binding.progresBar.show()
                             viewModel.getEmployees()
                         }
                     }
@@ -114,7 +114,7 @@ class EmployeeListingFragment : Fragment() {
                 }
                 is UiStateResource.Success -> {
                     Timber.d("${this.javaClass.canonicalName}: %s", state.data)
-                    binding.employeeListingProgresBar.hide()
+                    binding.progresBar.hide()
                     adatper.updateList(state.data.toMutableList())
                 }
             }
