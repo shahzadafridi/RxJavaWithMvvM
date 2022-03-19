@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="item_employee_divider">#33000000</color>
     <color name="green">#8BC34A</color>
+    <color name="round_gray_boarder">#28090909</color>
 </resources>
