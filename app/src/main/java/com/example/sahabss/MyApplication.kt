@@ -2,8 +2,10 @@ package com.example.sahabss
 
 import android.app.Application
 import com.example.sahabss.util.ReleaseTree
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class MyApplication: Application() {
 
     override fun onCreate() {

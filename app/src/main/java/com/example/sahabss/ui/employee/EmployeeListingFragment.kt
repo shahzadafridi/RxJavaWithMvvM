@@ -11,8 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.sahabss.R
 import com.example.sahabss.databinding.FragmentEmployeeListingBinding
 import com.example.sahabss.util.UiStateResource
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class EmployeeListingFragment : Fragment() {
 
     private var _binding: FragmentEmployeeListingBinding? = null
@@ -33,9 +35,7 @@ class EmployeeListingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
+        //findNavController().navigate(R.id.action_EmployeeListingFragment_to_EmployeeDetailFragment)
         observer()
     }
 

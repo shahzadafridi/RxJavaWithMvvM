@@ -5,14 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.sahabss.R
 import com.example.sahabss.databinding.FragmentEmployeeDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EmployeeDetailFragment : Fragment() {
 
     private var _binding: FragmentEmployeeDetailBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: EmployeeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +31,7 @@ class EmployeeDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_EmployeeDetailFragment_to_EmployeeListingFragment)
         }
     }
 
