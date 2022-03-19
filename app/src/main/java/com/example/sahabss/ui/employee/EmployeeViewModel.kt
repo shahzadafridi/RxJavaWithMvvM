@@ -53,10 +53,10 @@ class EmployeeViewModel @Inject constructor(
         }
     }
 
-    fun updateEmployeeById(id: Int) {
+    fun updateEmployeeById(id: Int, payload: Map<String,String?>,) {
         viewModelScope.launch {
             _updateEmployeeLiveData.value = UiStateResource.Loading
-            repository.updateEmployee(compositeDisposable,id){
+            repository.updateEmployee(compositeDisposable,id, payload){
                 _updateEmployeeLiveData.postValue(it)
             }
         }

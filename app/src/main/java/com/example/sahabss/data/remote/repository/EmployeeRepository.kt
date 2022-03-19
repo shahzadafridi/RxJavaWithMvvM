@@ -4,6 +4,7 @@ import com.example.sahabss.data.remote.model.employee.Employee
 import com.example.sahabss.util.UiStateResource
 import io.reactivex.Maybe
 import io.reactivex.disposables.CompositeDisposable
+import retrofit2.http.Body
 
 interface EmployeeRepository {
 
@@ -21,6 +22,7 @@ interface EmployeeRepository {
     fun updateEmployee(
         compositeDisposable: CompositeDisposable,
         id: Int,
+        payload: Map<String,String?>,
         onResponse: (UiStateResource<String>) -> Unit
     )
 

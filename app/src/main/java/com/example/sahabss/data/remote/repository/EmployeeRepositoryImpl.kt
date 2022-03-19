@@ -69,10 +69,11 @@ class EmployeeRepositoryImpl @Inject constructor(
     override fun updateEmployee(
         compositeDisposable: CompositeDisposable,
         id: Int,
+        payload: Map<String,String?>,
         onResponse: (UiStateResource<String>) -> Unit
     ) {
         compositeDisposable.add(
-            apiService.updateEmployees(id)
+            apiService.updateEmployees(id,payload)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<UpdateEmployeeDTO>() {
