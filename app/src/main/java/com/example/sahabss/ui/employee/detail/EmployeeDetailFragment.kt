@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.sahabss.data.remote.model.employee.Employee
 import com.example.sahabss.databinding.FragmentEmployeeDetailBinding
-import com.example.sahabss.ui.employee.EmployeeViewModel
 import com.example.sahabss.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -20,7 +19,7 @@ class EmployeeDetailFragment : Fragment() {
 
     private var _binding: FragmentEmployeeDetailBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: EmployeeViewModel by viewModels()
+    private val viewModel: DetailEmployeeViewModel by viewModels()
     private val args: EmployeeDetailFragmentArgs by navArgs()
 
 
@@ -75,7 +74,7 @@ class EmployeeDetailFragment : Fragment() {
                         errorRetryBtn.setOnSafeClickListener {
                             errorLayout.hide()
                             binding.progresBar.show()
-                            viewModel.deleteEmployeeById(args.employeeId)
+                            viewModel.getEmployeeById(args.employeeId)
                         }
                     }
                     Timber.e("${this.javaClass.name}: %s", state.error.displayMessage)
