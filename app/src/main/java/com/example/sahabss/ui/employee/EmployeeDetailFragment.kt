@@ -1,4 +1,4 @@
-package com.example.sahabss.ui.fragments
+package com.example.sahabss.ui.employee
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,25 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.sahabss.R
-import com.example.sahabss.databinding.FragmentFirstBinding
+import com.example.sahabss.databinding.FragmentEmployeeDetailBinding
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
-class FirstFragment : Fragment() {
+class EmployeeDetailFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentEmployeeDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentEmployeeDetailBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -33,8 +26,8 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        binding.buttonSecond.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
     }
 
