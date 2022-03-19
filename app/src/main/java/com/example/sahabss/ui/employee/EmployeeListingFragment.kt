@@ -21,12 +21,15 @@ class EmployeeListingFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: EmployeeViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getEmployees()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentEmployeeListingBinding.inflate(inflater, container, false)
         return binding.root
 
