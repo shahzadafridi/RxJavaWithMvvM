@@ -27,6 +27,14 @@ class EmployeeViewModel @Inject constructor(
     val employeeLiveData: LiveData<UiStateResource<Employee>>
         get() = _employeeLiveData
 
+    private val _updateEmployeeLiveData = MutableLiveData<UiStateResource<String>>()
+    val updateEmployeeLiveData: LiveData<UiStateResource<String>>
+        get() = _updateEmployeeLiveData
+
+    private val _deleteEmployeeLiveData = MutableLiveData<UiStateResource<String>>()
+    val deleteEmployeeLiveData: LiveData<UiStateResource<String>>
+        get() = _deleteEmployeeLiveData
+
     fun getEmployees() {
         viewModelScope.launch {
             _employeesLiveData.value = UiStateResource.Loading
@@ -45,6 +53,23 @@ class EmployeeViewModel @Inject constructor(
         }
     }
 
+    fun updateEmployeeById(id: Int) {
+        viewModelScope.launch {
+            _updateEmployeeLiveData.value = UiStateResource.Loading
+            repository.updateEmployee(compositeDisposable,id){
+                _updateEmployeeLiveData.postValue(it)
+            }
+        }
+    }
+
+    fun deleteEmployeeById(id: Int) {
+        viewModelScope.launch {
+            _deleteEmployeeLiveData.value = UiStateResource.Loading
+            repository.deleteEmployee(compositeDisposable,id){
+                _deleteEmployeeLiveData.postValue(it)
+            }
+        }
+    }
 
     override fun onCleared() {
         compositeDisposable.dispose()
