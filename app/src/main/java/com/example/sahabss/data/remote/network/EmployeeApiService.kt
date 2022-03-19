@@ -21,7 +21,8 @@ interface EmployeeApiService {
 
     @PUT("api/v1/update/{id}")
     fun updateEmployees(
-        @Path("id") id: Int
+        @Path("id") id: Int,
+        @Body payload: Map<String,String?>,
     ): Single<UpdateEmployeeDTO>
 
     @DELETE("api/v1/delete/{id}")

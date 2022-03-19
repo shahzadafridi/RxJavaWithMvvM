@@ -30,7 +30,21 @@
         <action
             android:id="@+id/action_EmployeeDetailFragment_to_EmployeeListingFragment"
             app:destination="@id/employee_listing_fragment" />
+        <action
+            android:id="@+id/action_employee_detail_fragment_to_employeeUpdateFragment"
+            app:destination="@id/employeeUpdateFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/employeeUpdateFragment"
+        android:name="com.example.sahabss.ui.employee.update.EmployeeUpdateFragment"
+        android:label="EmployeeUpdateFragment" >
+        <action
+            android:id="@+id/action_employeeUpdateFragment_to_employee_detail_fragment"
+            app:destination="@id/employee_detail_fragment" />
+        <argument
+            android:name="employee"
+            app:argType="com.example.sahabss.data.remote.model.employee.Employee" />
     </fragment>
 
 </navigation>
