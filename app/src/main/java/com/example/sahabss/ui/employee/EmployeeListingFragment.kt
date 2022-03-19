@@ -1,18 +1,24 @@
 package com.example.sahabss.ui.employee
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.sahabss.R
 import com.example.sahabss.databinding.FragmentEmployeeListingBinding
+import com.example.sahabss.util.UiStateResource
+import timber.log.Timber
 
 class EmployeeListingFragment : Fragment() {
 
     private var _binding: FragmentEmployeeListingBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: EmployeeViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +35,23 @@ class EmployeeListingFragment : Fragment() {
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+        observer()
+    }
+
+    private fun observer() {
+        viewModel.employeesLiveData.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                UiStateResource.Loading -> {
+                    Timber.d("${this.javaClass.canonicalName}: %s", "Loading")
+                }
+                is UiStateResource.Failure -> {
+                    Timber.e("${this.javaClass.canonicalName}: %s", state.error.displayMessage)
+                }
+                is UiStateResource.Success -> {
+                    Timber.d("${this.javaClass.canonicalName}: %s", state.data)
+                }
+            }
         }
     }
 

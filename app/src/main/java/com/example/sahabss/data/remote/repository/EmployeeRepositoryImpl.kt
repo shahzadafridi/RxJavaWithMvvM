@@ -9,8 +9,6 @@ import com.example.sahabss.data.util.makeNetworkRequest
 import com.example.sahabss.util.UiStateResource
 import javax.inject.Inject
 
-private const val TAG = "TabRepositoryImpl"
-
 class EmployeeRepositoryImpl @Inject constructor(
     private val apiService: EmployeeApiService
 ) : EmployeeRepository {
