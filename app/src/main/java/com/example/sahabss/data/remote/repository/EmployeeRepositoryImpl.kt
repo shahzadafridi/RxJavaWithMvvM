@@ -43,7 +43,7 @@ class EmployeeRepositoryImpl @Inject constructor(
 
     override fun getEmployee(
         compositeDisposable: CompositeDisposable,
-        id: String,
+        id: Int,
         onResponse: (UiStateResource<Employee>) -> Unit
     ) {
         compositeDisposable.add(
@@ -66,7 +66,7 @@ class EmployeeRepositoryImpl @Inject constructor(
 
     override fun updateEmployee(
         compositeDisposable: CompositeDisposable,
-        id: String,
+        id: Int,
         onResponse: (UiStateResource<String>) -> Unit
     ) {
         compositeDisposable.add(
@@ -89,7 +89,7 @@ class EmployeeRepositoryImpl @Inject constructor(
 
     override fun deleteEmployee(
         compositeDisposable: CompositeDisposable,
-        id: String,
+        id: Int,
         onResponse: (UiStateResource<String>) -> Unit
     ) {
         compositeDisposable.add(

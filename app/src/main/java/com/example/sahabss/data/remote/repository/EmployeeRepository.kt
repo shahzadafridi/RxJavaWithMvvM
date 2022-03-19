@@ -14,19 +14,19 @@ interface EmployeeRepository {
 
     fun getEmployee(
         compositeDisposable: CompositeDisposable,
-        id: String,
+        id: Int,
         onResponse: (UiStateResource<Employee>) -> Unit
     )
 
     fun updateEmployee(
         compositeDisposable: CompositeDisposable,
-        id: String,
+        id: Int,
         onResponse: (UiStateResource<String>) -> Unit
     )
 
     fun deleteEmployee(
         compositeDisposable: CompositeDisposable,
-        id: String,
+        id: Int,
         onResponse: (UiStateResource<String>) -> Unit
     )
 }

@@ -36,7 +36,7 @@ class EmployeeViewModel @Inject constructor(
         }
     }
 
-    fun getEmployeeById(id: String) {
+    fun getEmployeeById(id: Int) {
         viewModelScope.launch {
             _employeeLiveData.value = UiStateResource.Loading
             repository.getEmployee(compositeDisposable,id){

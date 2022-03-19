@@ -16,17 +16,17 @@ interface EmployeeApiService {
 
     @GET("api/v1/employee/{id}")
     fun getEmployee(
-        @Path("id") id:String
+        @Path("id") id: Int
     ): Single<EmployeeDTO>
 
     @PUT("api/v1/update/{id}")
     fun updateEmployees(
-        @Path("id") id:String
+        @Path("id") id: Int
     ): Single<UpdateEmployeeDTO>
 
     @DELETE("api/v1/delete/{id}")
     fun deleteEmployees(
-        @Path("id") id:String
+        @Path("id") id: Int
     ): Single<DeleteEmployeeDTO>
 
 }
