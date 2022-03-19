@@ -11,8 +11,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -37,13 +39,12 @@ object NetworkModule {
             .create()
     }
 
-    /*
     @Provides
     @Singleton
     internal fun provideCallAdapterFactory(): CallAdapter.Factory {
         return RxJava2CallAdapterFactory.create()
     }
-    */
+
 
     @Provides
     @Singleton
@@ -68,13 +69,14 @@ object NetworkModule {
     @Singleton
     internal fun provideRevampRetrofit(
         okHttpClient: OkHttpClient,
-        converterFactory: Converter.Factory
+        converterFactory: Converter.Factory,
+        callAdapterFactory: CallAdapter.Factory
     ): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(RetrofitConstants.BASE_URL)
             .addConverterFactory(converterFactory)
-            //.addCallAdapterFactory(callAdapterFactory)
+            .addCallAdapterFactory(callAdapterFactory)
             .build()
     }
 
