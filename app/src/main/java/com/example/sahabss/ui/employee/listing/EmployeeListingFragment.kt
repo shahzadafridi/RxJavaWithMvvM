@@ -21,6 +21,16 @@ class EmployeeListingFragment : Fragment() {
     private var _binding: FragmentEmployeeListingBinding? = null
     private val binding get() = _binding!!
     private val viewModel: EmployeeViewModel by viewModels()
+    private val adatper: EmployeeListingAdatper by lazy {
+        EmployeeListingAdatper(
+            onItemClicked = { _, it ->
+               onItemClicked(it)
+            },
+            onDeleteClicked = {pos, it ->
+                onDeleteClicked(pos, it)
+            }
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +48,45 @@ class EmployeeListingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.employeeListingRv.apply {
+            adapter = adatper
+        }
         observer()
     }
 
-    private fun loadEmployeeList(data: List<Employee>){
-        binding.employeeListingRv.apply {
-            adapter = EmployeeListingAdatper(data){
-                findNavController().navigate(
-                    EmployeeListingFragmentDirections.actionEmployeeListingFragmentToEmployeeDetailFragment(
-                        it.id
-                    )
-                )
+    private fun onItemClicked(item: Employee){
+        findNavController().navigate(
+            EmployeeListingFragmentDirections.actionEmployeeListingFragmentToEmployeeDetailFragment(
+                item.id
+            )
+        )
+    }
+
+    private fun onDeleteClicked(position: Int, item: Employee){
+        binding.employeeListingProgresBar.show()
+        viewModel.deleteEmployeeById(item.id)
+        viewModel.deleteEmployeeLiveData.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                UiStateResource.Loading -> {
+                    Timber.d("${this.javaClass.canonicalName}: %s", "Loading")
+                }
+                is UiStateResource.Failure -> {
+                    binding.errorLay.apply {
+                        errorLayout.show()
+                        errorTv.setText(state.error.displayMessage)
+                        errorRetryBtn.setOnSafeClickListener {
+                            errorLayout.hide()
+                            binding.employeeListingProgresBar.show()
+                            viewModel.deleteEmployeeById(item.id)
+                        }
+                    }
+                    Timber.e("${this.javaClass.canonicalName}: %s", state.error.displayMessage)
+                }
+                is UiStateResource.Success -> {
+                    binding.employeeListingProgresBar.hide()
+                    adatper.removeItem(position)
+                    Timber.d("${this.javaClass.canonicalName}: %s", state.data)
+                }
             }
         }
     }
@@ -67,6 +105,8 @@ class EmployeeListingFragment : Fragment() {
                         errorLayout.show()
                         errorTv.setText(state.error.displayMessage)
                         errorRetryBtn.setOnSafeClickListener {
+                            errorLayout.hide()
+                            binding.employeeListingProgresBar.show()
                             viewModel.getEmployees()
                         }
                     }
@@ -75,7 +115,7 @@ class EmployeeListingFragment : Fragment() {
                 is UiStateResource.Success -> {
                     Timber.d("${this.javaClass.canonicalName}: %s", state.data)
                     binding.employeeListingProgresBar.hide()
-                    loadEmployeeList(state.data)
+                    adatper.updateList(state.data.toMutableList())
                 }
             }
         }
@@ -93,19 +133,7 @@ class EmployeeListingFragment : Fragment() {
             }
         }
 
-        viewModel.deleteEmployeeLiveData.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                UiStateResource.Loading -> {
-                    Timber.d("${this.javaClass.canonicalName}: %s", "Loading")
-                }
-                is UiStateResource.Failure -> {
-                    Timber.e("${this.javaClass.canonicalName}: %s", state.error.displayMessage)
-                }
-                is UiStateResource.Success -> {
-                    Timber.d("${this.javaClass.canonicalName}: %s", state.data)
-                }
-            }
-        }
+
 
     }
 

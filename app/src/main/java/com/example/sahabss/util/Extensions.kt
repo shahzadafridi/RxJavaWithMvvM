@@ -15,16 +15,19 @@ import com.example.sahabss.R
 import com.google.android.material.snackbar.Snackbar
 
 
+
 fun View.show(){
-    visibility = View.VISIBLE
+    animate().alpha(1f).withEndAction {
+        visibility = View.VISIBLE
+    }
 }
 
 fun View.invisible(){
-    visibility = View.INVISIBLE
+    animate().alpha(0f).withEndAction { visibility = View.INVISIBLE }
 }
 
 fun View.hide(){
-    visibility = View.GONE
+    animate().alpha(0f).withEndAction { visibility = View.GONE }
 }
 
 fun View.showSnackBar(message: String?){
@@ -32,7 +35,6 @@ fun View.showSnackBar(message: String?){
         Snackbar.make(this,it,Snackbar.LENGTH_LONG).show()
     }
 }
-
 
 fun ImageView.load(
     url: Any?, onLoadingFinished: () -> Unit = {},
@@ -68,7 +70,6 @@ fun ImageView.load(
         .listener(listener)
         .into(this)
 }
-
 
 fun View.setOnSafeClickListener(block: (View) -> Unit) {
     setOnClickListener(SafeClickListener { block(it) })
