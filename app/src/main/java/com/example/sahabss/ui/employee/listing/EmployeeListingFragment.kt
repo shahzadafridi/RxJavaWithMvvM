@@ -85,6 +85,7 @@ class EmployeeListingFragment : Fragment() {
                 is UiStateResource.Success -> {
                     binding.progresBar.hide()
                     adatper.removeItem(position)
+                    binding.root.showSnackBar(state.data)
                     Timber.d("${this.javaClass.canonicalName}: %s", state.data)
                 }
             }

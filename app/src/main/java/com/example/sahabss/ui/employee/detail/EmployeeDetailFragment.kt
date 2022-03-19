@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.sahabss.R
 import com.example.sahabss.data.remote.model.employee.Employee
 import com.example.sahabss.databinding.FragmentEmployeeDetailBinding
 import com.example.sahabss.ui.employee.EmployeeViewModel
@@ -50,6 +49,13 @@ class EmployeeDetailFragment : Fragment() {
             name.setText(data.employeeName)
             salary.setText(data.employeeSalary.toString())
             age.setText(data.employeeAge.toString())
+            edit.setOnSafeClickListener {
+                findNavController().navigate(
+                    EmployeeDetailFragmentDirections.actionEmployeeDetailFragmentToEmployeeUpdateFragment(
+                       data
+                    )
+                )
+            }
         }
     }
 
