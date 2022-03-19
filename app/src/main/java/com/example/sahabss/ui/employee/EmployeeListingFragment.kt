@@ -37,8 +37,6 @@ class EmployeeListingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //findNavController().navigate(R.id.action_EmployeeListingFragment_to_EmployeeDetailFragment)
         observer()
     }
 
@@ -53,9 +51,44 @@ class EmployeeListingFragment : Fragment() {
                 }
                 is UiStateResource.Success -> {
                     Timber.d("${this.javaClass.canonicalName}: %s", state.data)
+                    viewModel.deleteEmployeeById( state.data[0].id)
+                    viewModel.updateEmployeeById(state.data[0].id)
+                    findNavController().navigate(
+                        EmployeeListingFragmentDirections.actionEmployeeListingFragmentToEmployeeDetailFragment(
+                            state.data[0].id
+                        )
+                    )
                 }
             }
         }
+        viewModel.updateEmployeeLiveData.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                UiStateResource.Loading -> {
+                    Timber.d("${this.javaClass.canonicalName}: %s", "Loading")
+                }
+                is UiStateResource.Failure -> {
+                    Timber.e("${this.javaClass.canonicalName}: %s", state.error.displayMessage)
+                }
+                is UiStateResource.Success -> {
+                    Timber.d("${this.javaClass.canonicalName}: %s", state.data)
+                }
+            }
+        }
+
+        viewModel.deleteEmployeeLiveData.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                UiStateResource.Loading -> {
+                    Timber.d("${this.javaClass.canonicalName}: %s", "Loading")
+                }
+                is UiStateResource.Failure -> {
+                    Timber.e("${this.javaClass.canonicalName}: %s", state.error.displayMessage)
+                }
+                is UiStateResource.Success -> {
+                    Timber.d("${this.javaClass.canonicalName}: %s", state.data)
+                }
+            }
+        }
+
     }
 
     override fun onDestroyView() {

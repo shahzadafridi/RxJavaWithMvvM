@@ -5,26 +5,28 @@ import com.example.sahabss.data.remote.dto.employee.EmployeesDTO
 import com.example.sahabss.data.remote.dto.employee.delete.DeleteEmployeeDTO
 import com.example.sahabss.data.remote.dto.employee.update.UpdateEmployeeDTO
 import com.example.sahabss.data.remote.model.ApiResponse
+import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.*
 
 interface EmployeeApiService {
 
     @GET("api/v1/employees")
-    suspend fun getEmployees(): ApiResponse<EmployeesDTO>
+    fun getEmployees(): Observable<EmployeesDTO>
 
     @GET("api/v1/employee/{id}")
-    suspend fun getEmployee(
-        @Path("id") id:String
-    ): ApiResponse<EmployeeDTO>
+    fun getEmployee(
+        @Path("id") id: Int
+    ): Single<EmployeeDTO>
 
     @PUT("api/v1/update/{id}")
-    suspend fun updateEmployees(
-        @Path("id") id:String
-    ): ApiResponse<UpdateEmployeeDTO>
+    fun updateEmployees(
+        @Path("id") id: Int
+    ): Single<UpdateEmployeeDTO>
 
     @DELETE("api/v1/delete/{id}")
-    suspend fun deleteEmployees(
-        @Path("id") id:String
-    ): ApiResponse<DeleteEmployeeDTO>
+    fun deleteEmployees(
+        @Path("id") id: Int
+    ): Single<DeleteEmployeeDTO>
 
 }

@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.sahabss.R
 import com.example.sahabss.databinding.FragmentEmployeeDetailBinding
+import com.example.sahabss.util.UiStateResource
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class EmployeeDetailFragment : Fragment() {
@@ -17,6 +20,13 @@ class EmployeeDetailFragment : Fragment() {
     private var _binding: FragmentEmployeeDetailBinding? = null
     private val binding get() = _binding!!
     private val viewModel: EmployeeViewModel by viewModels()
+    private val args: EmployeeDetailFragmentArgs by navArgs()
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getEmployeeById(args.employeeId)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +42,24 @@ class EmployeeDetailFragment : Fragment() {
 
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_EmployeeDetailFragment_to_EmployeeListingFragment)
+        }
+        observer()
+    }
+
+    private fun observer() {
+
+        viewModel.employeeLiveData.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                UiStateResource.Loading -> {
+                    Timber.d("${this.javaClass.name}: %s", "Loading")
+                }
+                is UiStateResource.Failure -> {
+                    Timber.e("${this.javaClass.name}: %s", state.error.displayMessage)
+                }
+                is UiStateResource.Success -> {
+                    Timber.d("${this.javaClass.name}: %s", state.data)
+                }
+            }
         }
     }
 

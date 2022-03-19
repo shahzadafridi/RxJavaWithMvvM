@@ -13,16 +13,24 @@
 
         <action
             android:id="@+id/action_EmployeeListingFragment_to_EmployeeDetailFragment"
-            app:destination="@id/employee_detail_fragment" />
+            app:destination="@id/employee_detail_fragment"/>
+
     </fragment>
+
     <fragment
         android:id="@+id/employee_detail_fragment"
         android:name="com.example.sahabss.ui.employee.EmployeeDetailFragment"
         android:label="@string/employee_detail_fragment_label"
         tools:layout="@layout/fragment_employee_detail">
 
+        <argument
+            android:name="employeeId"
+            app:argType="integer" />
+
         <action
             android:id="@+id/action_EmployeeDetailFragment_to_EmployeeListingFragment"
             app:destination="@id/employee_listing_fragment" />
+
     </fragment>
+
 </navigation>
