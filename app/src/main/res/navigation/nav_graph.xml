@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/employee_listing_fragment">
+    app:startDestination="@id/constraintLayoutFragment">
 
     <fragment
         android:id="@+id/employee_listing_fragment"
@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_EmployeeListingFragment_to_EmployeeDetailFragment"
             app:destination="@id/employee_detail_fragment"/>
+        <action
+            android:id="@+id/action_employee_listing_fragment_to_constraintLayoutFragment"
+            app:destination="@id/constraintLayoutFragment" />
 
     </fragment>
 
@@ -45,6 +48,15 @@
         <argument
             android:name="employee"
             app:argType="com.example.sahabss.data.remote.model.employee.Employee" />
+    </fragment>
+    <fragment
+        android:id="@+id/constraintLayoutFragment"
+        android:name="com.example.sahabss.ui.constraint.ConstraintLayoutFragment"
+        android:label="fragment_constraint_layout"
+        tools:layout="@layout/fragment_constraint_layout" >
+        <action
+            android:id="@+id/action_constraintLayoutFragment_to_employee_listing_fragment"
+            app:destination="@id/employee_listing_fragment" />
     </fragment>
 
 </navigation>

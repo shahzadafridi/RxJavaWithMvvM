@@ -16,5 +16,7 @@
     <string name="error_name">Enter name</string>
     <string name="error_salary">Enter salary</string>
     <string name="error_age">Enter age</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
