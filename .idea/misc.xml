@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/layout/error_layout.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_constraint_layout.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_constraint_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_employee_detail.xml" value="0.2171875" />
         <entry key="app/src/main/res/layout/fragment_employee_listing.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_employee_update.xml" value="0.25" />
